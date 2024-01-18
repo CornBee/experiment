@@ -13,8 +13,8 @@ number_of_messages = 1000
 log_file_path = '/app/logs/sender_log.txt'
 
 # 로그 파일에 데이터를 기록하는 함수
-def log_data(log_message):
-    with open(log_file_path, 'a') as file:
+def log_data(log_message, mode='a'):  # Default to append; pass 'w' to overwrite
+    with open(log_file_path, mode) as file:
         file.write(log_message + '\n')
 
 # 주기를 결정하는 함수
@@ -24,6 +24,9 @@ def get_sleep_duration(priority, iteration):
     else:
         # less-important-sender는 시간이 지남에 따라 전송 주기를 줄임
         return max(5 - iteration * 0.1, 1)  # 5초에서 시작하여 점점 감소, 최소 1초
+    
+# 스크립트 시작 시 로그 파일을 비웁니다.
+log_data("Starting new receiver log.\n", mode='w')
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((receiver_host, receiver_port))
