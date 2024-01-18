@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  important-sender:
+    build: ./sender
+    depends_on:
+      - receiver
+    networks:
+      - experiment-network
+    environment:
+      - PRIORITY=high
+    volumes:
+      - ./logs/important-sender:/app/logs
+
+  less-important-sender:
+    build: ./sender
+    depends_on:
+      - receiver
+    networks:
+      - experiment-network
+    environment:
+      - PRIORITY=low
+    volumes:
+      - ./logs/less-important-sender:/app/logs
+
+  receiver:
+    build: ./receiver
+    networks:
+      - experiment-network
+    volumes:
+      - ./logs/receiver:/app/logs
+
+networks:
+  experiment-network:
+    driver: bridge
