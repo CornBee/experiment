@@ -30,3 +30,6 @@ docker-compose exec <service_name> /bin/bash
 
 - 특정 서비스 강제 재시작
 docker-compose up --force-recreate <service_name>
+
+- 주피터 노트북 시작
+ jupyter notebook

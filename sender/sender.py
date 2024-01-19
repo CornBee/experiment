@@ -2,47 +2,27 @@ import socket
 import time
 import os
 
-# Read the priority from the environment variable
+send_interval = float(os.getenv('SEND_INTERVAL', '1'))
 priority = os.getenv('PRIORITY', 'low')
 
-receiver_host = 'receiver'  # 서비스 이름
+receiver_host = 'receiver'
 receiver_port = 12345
 number_of_messages = 1000
 
-# 로그 파일 경로 설정
 log_file_path = '/app/logs/sender_log.txt'
 
-# 로그 파일에 데이터를 기록하는 함수
-def log_data(log_message, mode='a'):  # Default to append; pass 'w' to overwrite
+def log_data(log_message, mode='a'):
     with open(log_file_path, mode) as file:
         file.write(log_message + '\n')
 
-# 주기를 결정하는 함수
-def get_sleep_duration(priority, iteration):
-    if priority == 'high':
-        return 1  # important-sender는 항상 1초마다 메시지 전송
-    else:
-        # less-important-sender는 시간이 지남에 따라 전송 주기를 줄임
-        return max(5 - iteration * 0.1, 1)  # 5초에서 시작하여 점점 감소, 최소 1초
-    
-# 스크립트 시작 시 로그 파일을 비웁니다.
-log_data("Starting new receiver log.\n", mode='w')
+log_data("Sender script started.\n", mode='w')
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.connect((receiver_host, receiver_port))
+# UDP 소켓 생성
+client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-    # 'receiver'로부터 시작 신호를 받을 때까지 대기
-    start_signal = s.recv(1024)
-    if start_signal.decode('utf-8') == 'START':
-        for _ in range(number_of_messages):
-            iteration = 0
-
-            send_time = time.time()
-            message = f"{send_time}"
-            s.sendall(message.encode('utf-8'))
-            # 로그 파일에 송신 시간 기록
-            log_data(f"Sent at {send_time} with priority {priority}")
-            # 각 'sender'의 전송 주기 결정
-            sleep_duration = get_sleep_duration(priority, iteration)
-            time.sleep(sleep_duration)
-            iteration += 1
+for i in range(number_of_messages):
+    send_time = time.time()
+    message = f"{send_time},{priority}"
+    client.sendto(message.encode('utf-8'), (receiver_host, receiver_port))
+    log_data(f"Sent at {send_time} with priority {priority}")
+    time.sleep(send_interval)

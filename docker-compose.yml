@@ -9,6 +9,7 @@ services:
       - experiment-network
     environment:
       - PRIORITY=high
+      - SEND_INTERVAL=1
     volumes:
       - ./logs/important-sender:/app/logs
 
@@ -20,6 +21,7 @@ services:
       - experiment-network
     environment:
       - PRIORITY=low
+      - SEND_INTERVAL=0.1
     volumes:
       - ./logs/less-important-sender:/app/logs
 

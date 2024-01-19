@@ -1,2 +1,33 @@
-Starting new receiver log.
+Sender script started.
 
+Sent at 1705623470.122067 with priority high
+Sent at 1705623471.1235597 with priority high
+Sent at 1705623472.1251602 with priority high
+Sent at 1705623473.1273062 with priority high
+Sent at 1705623474.1288142 with priority high
+Sent at 1705623475.1302254 with priority high
+Sent at 1705623476.1322446 with priority high
+Sent at 1705623477.1336348 with priority high
+Sent at 1705623478.1349711 with priority high
+Sent at 1705623479.1361597 with priority high
+Sent at 1705623480.1375353 with priority high
+Sent at 1705623481.1379087 with priority high
+Sent at 1705623482.1393182 with priority high
+Sent at 1705623483.1407466 with priority high
+Sent at 1705623484.141867 with priority high
+Sent at 1705623485.1432357 with priority high
+Sent at 1705623486.1445906 with priority high
+Sent at 1705623487.1458697 with priority high
+Sent at 1705623488.1472 with priority high
+Sent at 1705623489.14858 with priority high
+Sent at 1705623490.1498733 with priority high
+Sent at 1705623491.1506925 with priority high
+Sent at 1705623492.1520638 with priority high
+Sent at 1705623493.1536791 with priority high
+Sent at 1705623494.1549835 with priority high
+Sent at 1705623495.1565583 with priority high
+Sent at 1705623496.1578968 with priority high
+Sent at 1705623497.1592507 with priority high
+Sent at 1705623498.1606033 with priority high
+Sent at 1705623499.1619015 with priority high
+Sent at 1705623500.163317 with priority high
